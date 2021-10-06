@@ -13,14 +13,15 @@ public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private Instant doissued;
 
     @Column(nullable = false)
     private Instant expiryDate;
 
-
+    @Column(nullable = false, unique = true)
+    private String token;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -30,7 +31,7 @@ public class RefreshToken {
     private RefreshTokenstatus tokenstatus;
 
 
-    public RefreshToken(Integer id) {
+    public RefreshToken(Long id) {
         this.id = id;
     }
 

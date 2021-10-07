@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserstatusDao extends JpaRepository<Userstatus, Integer> {
 
-    Optional<Userstatus> findByUserstatus(String name);
+
 }

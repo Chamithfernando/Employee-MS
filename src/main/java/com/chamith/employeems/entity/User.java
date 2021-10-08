@@ -46,14 +46,15 @@ public class User {
     private String password;
 
     private Integer failedattempts;
+
     private LocalDateTime tolocked;
 
     @ManyToOne
     private Userstatus userstatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"creator"})
-    private Employee employee;
+    @JsonIgnore
+    @OneToMany(mappedBy = "creator" )
+    private List<Employee> employeeList;
 
     @ManyToMany
     @JoinTable(
@@ -63,9 +64,6 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy="creator")
-    private List<Employee> employeeListBycreator;
 
 
     public User(Long id) {

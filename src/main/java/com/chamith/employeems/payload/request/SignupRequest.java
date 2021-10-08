@@ -1,5 +1,9 @@
 package com.chamith.employeems.payload.request;
 
+import com.chamith.employeems.entity.Userstatus;
+
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,6 +24,8 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+
   
     public String getUsername() {
         return username;

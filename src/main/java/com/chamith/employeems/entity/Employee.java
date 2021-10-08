@@ -72,10 +72,12 @@ public class Employee{
     private Designation designation;
 
     @ManyToOne(optional=false)
+    private Department department;
+
+    @ManyToOne(optional=false)
     private Employeestatus employeestatus;
 
     @ManyToOne(optional=false)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User creator;
 
     @ManyToOne(optional=false)
@@ -84,12 +86,17 @@ public class Employee{
     @Size(min=0, max=255, message="Maximum character count is 255")
     private String email;
 
-    @JsonIgnore
-    @OneToMany(mappedBy="employee")
-    private List<User> userList;
 
     @OneToMany(mappedBy = "employee")
     private List<BasicEmployee> basicEmployeeList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "employeeskill",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private List<Skill> skillList;
 
 
     public Employee(Integer id){

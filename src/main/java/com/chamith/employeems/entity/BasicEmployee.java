@@ -81,6 +81,14 @@ public class BasicEmployee {
     @ManyToOne(optional=false)
     private Employee employee;
 
+    @ManyToMany
+    @JoinTable(
+            name = "basicEmployee_has_skill",
+            joinColumns = @JoinColumn(name = "basicEmployee_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private List<Skill> skillList;
+
 
     public BasicEmployee(Integer id){
         this.id = id;

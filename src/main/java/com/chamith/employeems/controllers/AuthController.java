@@ -3,6 +3,7 @@ package com.chamith.employeems.controllers;
 
 import com.chamith.employeems.dao.RoleDao;
 import com.chamith.employeems.dao.UserDao;
+import com.chamith.employeems.dao.UserstatusDao;
 import com.chamith.employeems.entity.ERole;
 import com.chamith.employeems.entity.RefreshToken;
 import com.chamith.employeems.entity.Role;
@@ -44,6 +45,9 @@ public class AuthController {
   UserDao userDao;
 
   @Autowired
+  UserstatusDao userstatusDao;
+
+  @Autowired
   RoleDao roleDao;
 
   @Autowired
@@ -71,6 +75,8 @@ public class AuthController {
         .collect(Collectors.toList());
 
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+
+
 
     return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
         userDetails.getUsername(), userDetails.getEmail(), roles));
@@ -121,6 +127,7 @@ public class AuthController {
       });
     }
 
+    user.setUserstatus(userstatusDao.findById(1).get());
     user.setRoles(roles);
     userDao.save(user);
 
